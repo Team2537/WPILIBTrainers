@@ -1,9 +1,11 @@
-# WPILIB Trainers
+# Lesson 1: Motors
 
-## Introduction
+In FRC we use a type of motor controller called a SparkMax. These motor controllers are controlled by a protocol called CAN. CAN is a protocol that allows us to control multiple devices on the same wire. This is useful because it allows us to use less wires and therefore less weight.
 
-This repository contains pairs of markdown files and code exercises meant to teach WPILIB concepts.
-## Usage
-Each branch of this repository contains an exercise. This branch contains the overview and table of contents for the branches
+## Defining a Motor Controller Object
 
-## Table of Contents
+Motor Controllers are objects, and therefore are defined the same way as any other object.
+
+```kotlin
+val motorController = CANSparkMax(0, MotorType.kBrushless)
+```
