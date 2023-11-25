@@ -6,6 +6,7 @@ import frc.robot.Constants.OperatorConstants
 import frc.robot.commands.Autos
 import frc.robot.commands.ExampleCommand
 import frc.robot.subsystems.ExampleSubsystem
+import frc.robot.subsystems.MotorSubsystem
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -44,6 +45,6 @@ object RobotContainer
 
         // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
         // cancelling on release.
-        driverController.b().whileTrue(ExampleSubsystem.exampleMethodCommand())
+        driverController.b().whileTrue(MotorSubsystem.runOnce { MotorSubsystem.spin() })
     }
 }
