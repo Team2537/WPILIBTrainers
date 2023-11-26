@@ -1,61 +1,58 @@
-# Lesson 1: Motors
+# Lesson 2: Encoders
+<hr>
+## Introduction
 
-In FRC we use a type of motor controller called a SparkMax. These motor controllers are controlled by a protocol called CAN. CAN is a protocol that allows us to control multiple devices on the same wire. This is useful because it allows us to use less wires and therefore less weight.
+An encoder is a sensor that measures the rotation of a motor. It's very useful for determining things like the speed of a motor, or the distance it has rotated.
 
-## Defining a Motor Controller Object
+## Syntax
 
-Motor Controllers are objects, and therefore are defined the same way as any other object.
-
-When defining a SparkMax, we need to specify the CAN ID and the type of motor. The CAN ID is the number that is assigned to the motor controller. We use Neos, which are brushless motors, so we need to specify that the motor is brushless.
+Encoders are an object like most other sensors.
+You can get the `RelativeEncoder` object from a SparkMax motor controller by calling the `getEncoder()` method on the motor controller object.
 
 ```kotlin
-val motorController: CANSparkMax = CANSparkMax(0, MotorType.kBrushless)
+val motor: CANSparkMax = CANSparkMax(1, MotorType.kBrushless)
+val encoder: RelativeEncoder = motor.getEncoder()
 ```
 
-## Controlling the Motor
+## Methods
 
-To control the motor, we need to set the power of the motor. The power is a number between -1 and 1. A power of 1 is full speed forward, and a power of -1 is full speed backwards. A power of 0 is no movement.
+### `getVelocity()`
 
-Controlling the motor is as simple as using the `.set()` method.
+Returns the velocity of the encoder in rotations per minute (RPM).
 
 ```kotlin
-motorController.set(0.5) // Sets the motor to half speed forward
+val motor: CANSparkMax = CANSparkMax(1, MotorType.kBrushless)
+val encoder: RelativeEncoder = motor.getEncoder()
+
+val velocity: Double = encoder.getVelocity()
 ```
 
-## Stopping the Motor
+### `getPosition()`
 
-To stop the motor, we need to set the power to 0. This will stop the motor.
+Returns the position of the encoder in rotations.
 
 ```kotlin
-motorController.set(0) // Stops the motor
+val motor: CANSparkMax = CANSparkMax(1, MotorType.kBrushless)
+val encoder: RelativeEncoder = motor.getEncoder()
+
+val position: Double = encoder.getPosition()
 ```
 
-## Complex Configurations
+### SmartDashboard
 
-SparkMaxes have a couple of options that can be configured. These options are configured using methods on the motor controller object. After changing motor settings you must call the `.burnFlash()` method to save the settings to the motor controller.
-
-### Inverting the Motor
-
-To invert the motor, we need to use the `.setInverted()` method. This method takes a boolean as an argument. If the boolean is true, the motor will be inverted. If the boolean is false, the motor will not be inverted.
+As a quick note, you can display values (such as the encoder's velocity) on the SmartDashboard using the `SmartDashboard.putNumber()` method.
+This method takes two parameters: the name of the value, and the value itself, and must be called every time you want to update the value.
+This can be done using the `Periodic()` method.
 
 ```kotlin
-motorController.setInverted(true) // Inverts the motor
+val motor: CANSparkMax = CANSparkMax(1, MotorType.kBrushless)
+val encoder: RelativeEncoder = motor.getEncoder()
 
-motorController.burnFlash() // Saves the settings to the motor controller
-```
-
-### Setting the idle mode
-
-The idle mode is what the motor does when it's not being told to move. The two options are `kBrake` and `kCoast`. `kBrake` will cause the motors to stop and lock their rotation. `kCoast` will cause the motors to continue spinning with the momentum they had before they were stopped.
-
-```kotlin
-motorController.setIdleMode(IdleMode.kBrake) // Sets the idle mode to brake
-
-motorController.burnFlash() // Saves the settings to the motor controller
+SmartDashboard.putNumber("Encoder Velocity", encoder.getVelocity())
 ```
 
 ## Now go practice!
 
-Contained within the [MotorSubsystem](src/main/java/frc/robot/subsystems/MotorSubsystem.kt)
+Use the template contained within [MotorSubsystem](src/main/kotlin/frc/robot/subsystems/MotorSubsystem.kt) to learn how to use encoders.
 
 
