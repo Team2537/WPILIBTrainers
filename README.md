@@ -1,5 +1,6 @@
 # Lesson 2: Encoders
 <hr>
+
 ## Introduction
 
 An encoder is a sensor that measures the rotation of a motor. It's very useful for determining things like the speed of a motor, or the distance it has rotated.
