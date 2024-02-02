@@ -14,7 +14,7 @@ val motorController: CANSparkMax = CANSparkMax(0, MotorType.kBrushless)
 
 ## Controlling the Motor
 
-To control the motor, we need to set the power of the motor. The power is a number between -1 and 1. A power of 1 is full speed forward, and a power of -1 is full speed backwards. A power of 0 is no movement.
+To control the motor, we need to set the power of the motor. The main way that we do this is by giving it a percentage, in this case from -1 to 1. This essentially is the percentage of maximum voltage being sent to the motor.
 
 Controlling the motor is as simple as using the `.set()` method.
 
